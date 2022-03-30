@@ -57,8 +57,7 @@ QStringList JobOptions::getOptions() const {
       list << "--delete-before";
       break;
     default:
-      break;
-      ;
+      break;;
     }
   }
 

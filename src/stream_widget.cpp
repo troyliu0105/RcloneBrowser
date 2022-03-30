@@ -53,11 +53,11 @@ StreamWidget::StreamWidget(QProcess *rclone, QProcess *player,
                    static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(
                        &QProcess::finished),
                    this, [=]() {
-                     mRclone->deleteLater();
-                     mRunning = false;
-                     emit finished();
-                     emit closed();
-                   });
+        mRclone->deleteLater();
+        mRunning = false;
+        emit finished();
+        emit closed();
+      });
 
   ui.showDetails->setStyleSheet("QToolButton { border: 0; color: green; }");
   ui.showDetails->setText("Streaming");

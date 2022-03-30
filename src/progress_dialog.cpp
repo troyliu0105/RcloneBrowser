@@ -31,15 +31,15 @@ ProgressDialog::ProgressDialog(const QString &title, const QString &operation,
                    static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(
                        &QProcess::finished),
                    this, [=](int code, QProcess::ExitStatus status) {
-                     if (status == QProcess::NormalExit && code == 0) {
-                       if (close) {
-                         emit accept();
-                       }
-                     } else {
-                       ui.buttonShowOutput->setChecked(true);
-                       ui.buttonBox->setEnabled(true);
-                     }
-                   });
+        if (status == QProcess::NormalExit && code == 0) {
+          if (close) {
+            emit accept();
+          }
+        } else {
+          ui.buttonShowOutput->setChecked(true);
+          ui.buttonBox->setEnabled(true);
+        }
+      });
 
   QObject::connect(process, &QProcess::readyRead, this, [=]() {
     QString output = process->readAll();

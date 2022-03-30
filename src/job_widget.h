@@ -4,7 +4,7 @@
 #include "ui_job_widget.h"
 
 class JobWidget : public QWidget {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   JobWidget(QProcess *process, const QString &info, const QStringList &args,

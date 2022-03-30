@@ -171,13 +171,13 @@ QDataStream &operator>>(QDataStream &stream, JobOptions &jo) {
     throw SerializationException("stored version is newer");
 
   stream >> jo.description >> jo.jobType >> jo.operation >>
-      /* jo.dryRun >> */ jo.sync >> jo.syncTiming >> jo.skipNewer >>
-      jo.skipExisting >> jo.compare >> jo.compareOption >> jo.verbose >>
-      jo.sameFilesystem >> jo.dontUpdateModified >> jo.transfers >>
-      jo.checkers >> jo.bandwidth >> jo.minSize >> jo.minAge >> jo.maxAge >>
-      jo.maxDepth >> jo.connectTimeout >> jo.idleTimeout >> jo.retries >>
-      jo.lowLevelRetries >> jo.deleteExcluded >> jo.excluded >> jo.extra >>
-      jo.DriveSharedWithMe >> jo.source >> jo.dest;
+         /* jo.dryRun >> */ jo.sync >> jo.syncTiming >> jo.skipNewer >>
+         jo.skipExisting >> jo.compare >> jo.compareOption >> jo.verbose >>
+         jo.sameFilesystem >> jo.dontUpdateModified >> jo.transfers >>
+         jo.checkers >> jo.bandwidth >> jo.minSize >> jo.minAge >> jo.maxAge >>
+         jo.maxDepth >> jo.connectTimeout >> jo.idleTimeout >> jo.retries >>
+         jo.lowLevelRetries >> jo.deleteExcluded >> jo.excluded >> jo.extra >>
+         jo.DriveSharedWithMe >> jo.source >> jo.dest;
 
   // as fields are added in later revisions, check actualVersion here and
   // conditionally extract any new fields iff they are expected based on the
@@ -193,21 +193,21 @@ QDataStream &operator>>(QDataStream &stream, JobOptions &jo) {
 }
 
 QDataStream &operator>>(QDataStream &in, JobOptions::Operation &e) {
-  in >> (quint32 &)e;
+  in >> (quint32 &) e;
   return in;
 }
 
 QDataStream &operator>>(QDataStream &in, JobOptions::SyncTiming &e) {
-  in >> (quint32 &)e;
+  in >> (quint32 &) e;
   return in;
 }
 
 QDataStream &operator>>(QDataStream &in, JobOptions::CompareOption &e) {
-  in >> (quint32 &)e;
+  in >> (quint32 &) e;
   return in;
 }
 
 QDataStream &operator>>(QDataStream &in, JobOptions::JobType &e) {
-  in >> (quint32 &)e;
+  in >> (quint32 &) e;
   return in;
 }

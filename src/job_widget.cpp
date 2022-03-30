@@ -66,11 +66,11 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
     QRegExp rxChecks(R"(^Checks:\s+(\S+)$)"); // Until rclone 1.42
     QRegExp rxChecks2(
         R"(^Checks:\s+(\S+) \/ (\S+), ([0-9%-]+)$)");   // Starting with
-                                                        // rclone 1.43
+    // rclone 1.43
     QRegExp rxTransferred(R"(^Transferred:\s+(\S+)$)"); // Until rclone 1.42
     QRegExp rxTransferred2(
         R"(^Transferred:\s+(\S+) \/ (\S+), ([0-9%-]+)$)"); // Starting with
-                                                           // rclone 1.43
+    // rclone 1.43
     QRegExp rxTime(R"(^Elapsed time:\s+(\S+)$)");
     QRegExp rxProgress(
         R"(^\*([^:]+):\s*([^%]+)% done.+(ETA: [^)]+)$)"); // Until rclone 1.38
@@ -87,7 +87,7 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
 
       if (line.isEmpty()) {
         for (auto it = mActive.begin(), eit = mActive.end(); it != eit;
-             /* empty */) {
+          /* empty */) {
           auto label = it.value();
           if (mUpdated.contains(label)) {
             ++it;
@@ -108,7 +108,7 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
         ui.bandwidth->setText(rxSize.cap(2));
       } else if (rxSize2.exactMatch(line)) {
         ui.size->setText(rxSize2.cap(1) + " " + rxSize2.cap(2) + "B" + ", " +
-                         rxSize2.cap(5));
+            rxSize2.cap(5));
         ui.bandwidth->setText(rxSize2.cap(6));
         ui.eta->setText(rxSize2.cap(8));
         ui.totalsize->setText(rxSize2.cap(3) + " " + rxSize2.cap(4));
@@ -118,13 +118,13 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
         ui.checks->setText(rxChecks.cap(1));
       } else if (rxChecks2.exactMatch(line)) {
         ui.checks->setText(rxChecks2.cap(1) + " / " + rxChecks2.cap(2) + ", " +
-                           rxChecks2.cap(3));
+            rxChecks2.cap(3));
       } else if (rxTransferred.exactMatch(line)) {
         ui.transferred->setText(rxTransferred.cap(1));
       } else if (rxTransferred2.exactMatch(line)) {
         ui.transferred->setText(rxTransferred2.cap(1) + " / " +
-                                rxTransferred2.cap(2) + ", " +
-                                rxTransferred2.cap(3));
+            rxTransferred2.cap(2) + ", " +
+            rxTransferred2.cap(3));
       } else if (rxTime.exactMatch(line)) {
         ui.elapsed->setText(rxTime.cap(1));
       } else if (rxProgress.exactMatch(line)) {
@@ -193,7 +193,8 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
         }
 
         bar->setValue(rxProgress2.cap(2).toInt());
-        bar->setToolTip("File name: " + name + "\nFile stats" + rxProgress2.cap(0).mid(rxProgress2.cap(0).indexOf(':')));
+        bar->setToolTip(
+            "File name: " + name + "\nFile stats" + rxProgress2.cap(0).mid(rxProgress2.cap(0).indexOf(':')));
 
         mUpdated.insert(label);
       }
@@ -204,29 +205,29 @@ JobWidget::JobWidget(QProcess *process, const QString &info,
                    static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(
                        &QProcess::finished),
                    this, [=](int status, QProcess::ExitStatus) {
-                     mProcess->deleteLater();
-                     for (auto label : mActive) {
-                       ui.progress->removeWidget(label->buddy());
-                       ui.progress->removeWidget(label);
-                       delete label->buddy();
-                       delete label;
-                     }
+        mProcess->deleteLater();
+        for (auto label : mActive) {
+          ui.progress->removeWidget(label->buddy());
+          ui.progress->removeWidget(label);
+          delete label->buddy();
+          delete label;
+        }
 
-                     mRunning = false;
-                     if (status == 0) {
-                       ui.showDetails->setStyleSheet(
-                           "QToolButton { border: 0; color: black; }");
-                       ui.showDetails->setText("Finished");
-                     } else {
-                       ui.showDetails->setStyleSheet(
-                           "QToolButton { border: 0; color: red; }");
-                       ui.showDetails->setText("Error");
-                     }
+        mRunning = false;
+        if (status == 0) {
+          ui.showDetails->setStyleSheet(
+              "QToolButton { border: 0; color: black; }");
+          ui.showDetails->setText("Finished");
+        } else {
+          ui.showDetails->setStyleSheet(
+              "QToolButton { border: 0; color: red; }");
+          ui.showDetails->setText("Error");
+        }
 
-                     ui.cancel->setToolTip("Close");
+        ui.cancel->setToolTip("Close");
 
-                     emit finished(ui.info->text());
-                   });
+        emit finished(ui.info->text());
+      });
 
   ui.showDetails->setStyleSheet("QToolButton { border: 0; color: green; }");
   ui.showDetails->setText("Running");

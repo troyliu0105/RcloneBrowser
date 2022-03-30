@@ -41,7 +41,7 @@ class IconCache;
 class ItemSorter;
 
 class ItemModel : public QAbstractItemModel {
-  Q_OBJECT
+Q_OBJECT
 public:
   ItemModel(IconCache *icons, const QString &remote, QObject *parent);
   ~ItemModel();

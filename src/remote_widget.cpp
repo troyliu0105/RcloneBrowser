@@ -12,7 +12,7 @@ RemoteWidget::RemoteWidget(IconCache *iconCache, const QString &remote,
     : QWidget(parent) {
   ui.setupUi(this);
 
-QString root = isLocal ? "/" : QString();
+  QString root = isLocal ? "/" : QString();
 
 #ifndef Q_OS_WIN
   isLocal = false;
@@ -211,7 +211,7 @@ QString root = isLocal ? "/" : QString();
           QStringList() << "moveto" << GetRcloneConf() << GetDriveSharedWithMe()
                         << GetDefaultRcloneOptionsList() << remote + ":" + path
                         << remote + ":" +
-                               model->path(index.parent()).filePath(name));
+                            model->path(index.parent()).filePath(name));
       process.setProcessChannelMode(QProcess::MergedChannels);
 
       ProgressDialog progress("Rename", "Renaming...", pathMsg, &process, this);
@@ -273,10 +273,10 @@ QString root = isLocal ? "/" : QString();
       UseRclonePassword(&process);
       process.setProgram(GetRclone());
       process.setArguments(QStringList()
-                           << (model->isFolder(index) ? "purge" : "delete")
-                           << GetRcloneConf() << GetDriveSharedWithMe()
-                           << GetDefaultRcloneOptionsList()
-                           << remote + ":" + path);
+                               << (model->isFolder(index) ? "purge" : "delete")
+                               << GetRcloneConf() << GetDriveSharedWithMe()
+                               << GetDefaultRcloneOptionsList()
+                               << remote + ":" + path);
       process.setProcessChannelMode(QProcess::MergedChannels);
 
       ProgressDialog progress("Delete", "Deleting...", pathMsg, &process, this);
@@ -309,7 +309,7 @@ QString root = isLocal ? "/" : QString();
                                   .arg(remote),
                               QLineEdit::Normal, "Z:");
 #else
-        QString folder = QFileDialog::getExistingDirectory(this, QString("Mount %1").arg(remote));
+    QString folder = QFileDialog::getExistingDirectory(this, QString("Mount %1").arg(remote));
 #endif
 
     if (!folder.isEmpty()) {
@@ -362,7 +362,7 @@ QString root = isLocal ? "/" : QString();
     }
     ui.tree->selectionModel()->clear();
     ui.tree->selectionModel()->select(top, QItemSelectionModel::Select |
-                                               QItemSelectionModel::Rows);
+        QItemSelectionModel::Rows);
     model->refresh(top);
   });
 
@@ -513,8 +513,8 @@ QString root = isLocal ? "/" : QString();
       UseRclonePassword(&process);
       process.setProgram(GetRclone());
       process.setArguments(QStringList()
-                           << GetRcloneConf() << GetDriveSharedWithMe()
-                           << GetDefaultRcloneOptionsList() << e.getOptions());
+                               << GetRcloneConf() << GetDriveSharedWithMe()
+                               << GetDefaultRcloneOptionsList() << e.getOptions());
       process.setProcessChannelMode(QProcess::MergedChannels);
 
       ProgressDialog progress("Export", "Exporting...", dst, &process, this);
@@ -554,14 +554,14 @@ QString root = isLocal ? "/" : QString();
         auto settings = GetSettings();
         bool driveShared = ui.checkBoxShared->checkState();
         (driveShared
-             ? settings->setValue("Settings/driveShared", Qt::Checked)
-             : settings->setValue("Settings/driveShared", Qt::Unchecked));
+         ? settings->setValue("Settings/driveShared", Qt::Checked)
+         : settings->setValue("Settings/driveShared", Qt::Unchecked));
 
         qApp->setActiveWindow(this);
         QDir destPath = model->path(parent);
         QString dest = QFileInfo(path.path()).isDir()
-                           ? destPath.filePath(path.dirName())
-                           : destPath.path();
+                       ? destPath.filePath(path.dirName())
+                       : destPath.path();
 
         TransferDialog t(false, true, remote, dest, true, this);
         t.setSource(path.path());
@@ -582,8 +582,8 @@ QString root = isLocal ? "/" : QString();
         auto settings = GetSettings();
         bool driveShared = ui.checkBoxShared->checkState();
         (driveShared
-             ? settings->setValue("Settings/driveShared", Qt::Checked)
-             : settings->setValue("Settings/driveShared", Qt::Unchecked));
+         ? settings->setValue("Settings/driveShared", Qt::Checked)
+         : settings->setValue("Settings/driveShared", Qt::Unchecked));
 
         QMenu menu;
         menu.addAction(ui.refresh);

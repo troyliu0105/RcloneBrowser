@@ -4,7 +4,7 @@
 #include "ui_preferences_dialog.h"
 
 class PreferencesDialog : public QDialog {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   PreferencesDialog(QWidget *parent = nullptr);

@@ -146,21 +146,21 @@ int main(int argc, char *argv[]) {
       msgBox.setText("You need write "
                      "access to this folder:\n\n"
 #ifdef Q_OS_MACOS
-                     + appBundlePath.absolutePath() +
+                         + appBundlePath.absolutePath() +
 #else
 #ifdef Q_OS_WIN
-                     + tmpDir +
+          + tmpDir +
 #else
-                     + tmpDir.left(tmpDir.length() - 15) +
+          + tmpDir.left(tmpDir.length() - 15) +
 #endif
 #endif
-                     "\n\n"
-#ifdef Q_OS_MACOS
-                     "Or remove file:\n\n" +
-                     appBundlePath.baseName() +
-                     ".ini \n\nfrom the above folder "
-#else
-#ifdef Q_OS_WIN
+          "\n\n"
+          #ifdef Q_OS_MACOS
+          "Or remove file:\n\n" +
+          appBundlePath.baseName() +
+          ".ini \n\nfrom the above folder "
+          #else
+          #ifdef Q_OS_WIN
                      "Or remove file:\n\n" +
                      applicationPath.baseName() +
                      ".ini \n\nfrom the above folder "
@@ -169,8 +169,8 @@ int main(int argc, char *argv[]) {
                      tmpDir.left(tmpDir.length() - 15) +
                      "\n\n"
 #endif
-#endif
-                     "to disable portable mode.");
+          #endif
+          "to disable portable mode.");
       msgBox.exec();
     } else {
       QMessageBox msgBox;
@@ -178,14 +178,14 @@ int main(int argc, char *argv[]) {
       msgBox.setText("You need write "
                      "access to this folder: \n\n"
 #ifdef Q_OS_MACOS
-                     + tmpDir
+                         + tmpDir
 #else
 
 #ifdef Q_OS_WIN
-                     + tmpDir
+          + tmpDir
 #else
 
-                     + tmpDir.left(tmpDir.length() - 15)
+          + tmpDir.left(tmpDir.length() - 15)
 #endif
 #endif
       );

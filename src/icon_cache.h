@@ -5,7 +5,7 @@
 struct Item;
 
 class IconCache : public QObject {
-  Q_OBJECT
+Q_OBJECT
 public:
   IconCache(QObject *parent = nullptr);
   ~IconCache();

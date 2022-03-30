@@ -3,7 +3,7 @@
 #include <qfile.h>
 
 class ListOfJobOptions : public QObject {
-  Q_OBJECT
+Q_OBJECT
 
 protected:
   ~ListOfJobOptions() = default;

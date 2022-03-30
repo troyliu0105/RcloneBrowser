@@ -4,7 +4,7 @@
 #include "ui_export_dialog.h"
 
 class ExportDialog : public QDialog {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   ExportDialog(const QString &remote, const QDir &path,

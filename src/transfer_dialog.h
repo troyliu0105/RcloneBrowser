@@ -5,7 +5,7 @@
 #include "ui_transfer_dialog.h"
 
 class TransferDialog : public QDialog {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   TransferDialog(bool isDownload, bool isDrop, const QString &remote,

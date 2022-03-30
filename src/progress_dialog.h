@@ -4,7 +4,7 @@
 #include "ui_progress_dialog.h"
 
 class ProgressDialog : public QDialog {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   ProgressDialog(const QString &title, const QString &operation,

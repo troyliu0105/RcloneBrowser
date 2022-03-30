@@ -4,7 +4,7 @@
 #include "ui_stream_widget.h"
 
 class StreamWidget : public QWidget {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   StreamWidget(QProcess *rclone, QProcess *player, const QString &remote,

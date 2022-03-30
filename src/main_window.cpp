@@ -340,11 +340,11 @@ MainWindow::MainWindow() {
   QObject::connect(
       trayMenu->addAction("&Show"), &QAction::triggered, this, [=]() {
         MainWindow::setWindowState((windowState() & ~Qt::WindowMinimized) |
-                                   Qt::WindowActive);
+            Qt::WindowActive);
         MainWindow::show();  // bring window to top on macOS
         MainWindow::raise(); // bring window from minimized state on macOS
         MainWindow::activateWindow(); // bring window to front/unminimize on
-                                      // windows
+        // windows
         mSystemTray.setVisible(mAlwaysShowInTray);
 #ifdef Q_OS_MACOS
         osxShowDockIcon();
@@ -432,19 +432,19 @@ void MainWindow::rcloneGetVersion() {
           };
 #endif
 
-          QStringList lines = version.split("\n", QString::SkipEmptyParts);
+          QStringList lines = version.split("\n");
           QString rclone_info2;
           QString rclone_info3;
 
           int counter = 0;
-          foreach (QString line, lines) {
-            line = line.trimmed();
-            if (counter == 1)
-              rclone_info2 = line.replace("- ", "");
-            if (counter == 2)
-              rclone_info3 = line.replace("- ", "");
-            counter++;
-          };
+              foreach (QString line, lines) {
+              line = line.trimmed();
+              if (counter == 1)
+                rclone_info2 = line.replace("- ", "");
+              if (counter == 2)
+                rclone_info3 = line.replace("- ", "");
+              counter++;
+            };
 
           QFileInfo appBundlePath;
 #ifdef Q_OS_MACOS
@@ -457,16 +457,16 @@ void MainWindow::rcloneGetVersion() {
 
             mStatusMessage->setText(
                 rclone_info1 + " in " +
-                QDir::toNativeSeparators(GetRclone().replace(
-                    appBundlePath.fileName() + "/Contents/MacOS/../../../",
-                    "")) +
-                ", " + rclone_info2 + ", " + rclone_info3);
+                    QDir::toNativeSeparators(GetRclone().replace(
+                        appBundlePath.fileName() + "/Contents/MacOS/../../../",
+                        "")) +
+                    ", " + rclone_info2 + ", " + rclone_info3);
 
           } else {
 
             mStatusMessage->setText(rclone_info1 + " in " +
-                                    QDir::toNativeSeparators(GetRclone()) +
-                                    ", " + rclone_info2 + ", " + rclone_info3);
+                QDir::toNativeSeparators(GetRclone()) +
+                ", " + rclone_info2 + ", " + rclone_info3);
           }
 #else
 #ifdef Q_OS_WIN
@@ -588,12 +588,12 @@ void MainWindow::rcloneGetVersion() {
                       QString(
                           R"(<p>New rclone version is available</p>)"
                           R"(<p>You have: v)" +
-                          rclone_version_no +
-                          "<br />"
-                          R"(New version: v)" +
-                          rclone_latest_version_no +
-                          "</p>"
-                          R"(<p>Visit rclone <a href="https://rclone.org/downloads/">downloads</a> page to upgrade</p>)"));
+                              rclone_version_no +
+                              "<br />"
+                              R"(New version: v)" +
+                              rclone_latest_version_no +
+                              "</p>"
+                              R"(<p>Visit rclone <a href="https://rclone.org/downloads/">downloads</a> page to upgrade</p>)"));
                 };
               };
             };
@@ -666,9 +666,9 @@ void MainWindow::rcloneGetVersion() {
                           R"(<p>New Rclone Browser version is available</p>)"
                           R"(<p>You have: v)" RCLONE_BROWSER_VERSION "<br />"
                           R"(New version: v)" +
-                          rclone_browser_latest_version_no +
-                          "</p>"
-                          R"(<p>Visit <a href="https://github.com/kapitainsky/RcloneBrowser/releases/latest">releases</a> page to download</p>)"));
+                              rclone_browser_latest_version_no +
+                              "</p>"
+                              R"(<p>Visit <a href="https://github.com/kapitainsky/RcloneBrowser/releases/latest">releases</a> page to download</p>)"));
                 };
               };
             };
@@ -692,7 +692,7 @@ void MainWindow::rcloneConfig() {
   QString terminalRcloneCmd;
   if (!GetRcloneConf().isEmpty()) {
     terminalRcloneCmd = "\"" + GetRclone() + "\"" + " config" + " --config " +
-                        "\"" + GetRcloneConf().at(1) + "\"";
+        "\"" + GetRcloneConf().at(1) + "\"";
   } else {
     terminalRcloneCmd = "\"" + GetRclone() + "\"" + " config";
   }
@@ -709,11 +709,11 @@ void MainWindow::rcloneConfig() {
                    static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(
                        &QProcess::finished),
                    this, [=](int code, QProcess::ExitStatus) {
-                     if (code == 0) {
-                       emit rcloneListRemotes();
-                     }
-                     p->deleteLater();
-                   });
+        if (code == 0) {
+          emit rcloneListRemotes();
+        }
+        p->deleteLater();
+      });
 #endif
 
 #if defined(Q_OS_WIN32)
@@ -733,9 +733,9 @@ void MainWindow::rcloneConfig() {
   QTextStream(tmp) << "#!/bin/sh\n" << terminalRcloneCmd << "\n";
   tmp->close();
   tmp->setPermissions(QFileDevice::ReadUser | QFileDevice::WriteUser |
-                      QFileDevice::ExeUser | QFileDevice::ReadGroup |
-                      QFileDevice::ExeGroup | QFileDevice::ReadOther |
-                      QFileDevice::ExeOther);
+      QFileDevice::ExeUser | QFileDevice::ReadGroup |
+      QFileDevice::ExeGroup | QFileDevice::ReadOther |
+      QFileDevice::ExeOther);
   p->setProgram("open");
   p->setArguments(QStringList() << tmp->fileName());
 #else
@@ -859,35 +859,35 @@ void MainWindow::rcloneListRemotes() {
              size = lightModeiconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
 #endif
 #else
-             QString sysInfo = QSysInfo::productVersion();
-             // dark mode on older macOS
-             if (sysInfo == "10.9" ||
-                 sysInfo == "10.10" ||
-                 sysInfo == "10.11" ||
-                 sysInfo == "10.12" ||
-                 sysInfo == "10.13") {
+            QString sysInfo = QSysInfo::productVersion();
+            // dark mode on older macOS
+            if (sysInfo == "10.9" ||
+                sysInfo == "10.10" ||
+                sysInfo == "10.11" ||
+                sysInfo == "10.12" ||
+                sysInfo == "10.13") {
 
-               // on older macOS we also have to adjust icon size per mode
-               if (darkModeIni) {
-                 size = darkModeIconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
-                 img_add = "_inv";
-               } else {
-                 size = lightModeiconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
-                 img_add = "";
-               }
+              // on older macOS we also have to adjust icon size per mode
+              if (darkModeIni) {
+                size = darkModeIconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
+                img_add = "_inv";
+              } else {
+                size = lightModeiconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
+                img_add = "";
+              }
 
-             } else {
-               // for macOS > 10.13 native dark mode does not change IconSize base
-               size = 1.5 * lightModeiconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
-             }
+            } else {
+              // for macOS > 10.13 native dark mode does not change IconSize base
+              size = 1.5 * lightModeiconScale * style->pixelMetric(QStyle::PM_ListViewIconSize);
+            }
 #endif
             ui.remotes->setIconSize(QSize(size, size));
 
             QString path =
                 ":/remotes/images/" + type.replace(' ', '_') + img_add + ".png";
             QIcon icon(QFile(path).exists()
-                           ? path
-                           : ":/remotes/images/unknown" + img_add + ".png");
+                       ? path
+                       : ":/remotes/images/unknown" + img_add + ".png");
 
             QListWidgetItem *item = new QListWidgetItem(icon, name);
             item->setData(Qt::UserRole, type);
@@ -1214,7 +1214,7 @@ void MainWindow::addStream(const QString &remote, const QString &stream) {
   ui.jobs->insertWidget(1, line);
   ui.tabs->setTabText(1, QString("Jobs (%1)").arg(++mJobCount));
 
-  player->start(stream, QProcess::ReadOnly);
+  player->start(stream, {}, QProcess::ReadOnly);
   UseRclonePassword(rclone);
   rclone->start(GetRclone(),
                 QStringList() << "cat" << GetRcloneConf() << remote,

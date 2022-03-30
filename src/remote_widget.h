@@ -6,7 +6,7 @@
 class IconCache;
 
 class RemoteWidget : public QWidget {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   RemoteWidget(IconCache *icons, const QString &remote, bool isLocal,

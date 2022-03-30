@@ -13,15 +13,15 @@ ExportDialog::ExportDialog(const QString &remote, const QDir &path,
 
   QObject::connect(ui.buttonBox->button(QDialogButtonBox::RestoreDefaults),
                    &QPushButton::clicked, this, [=]() {
-                     ui.rbText->setChecked(true);
-                     ui.checkSameFilesystem->setChecked(false);
-                     ui.textMinSize->clear();
-                     ui.textMinAge->clear();
-                     ui.textMaxAge->clear();
-                     ui.spinMaxDepth->setValue(0);
-                     ui.textExclude->clear();
-                     ui.textExtra->clear();
-                   });
+        ui.rbText->setChecked(true);
+        ui.checkSameFilesystem->setChecked(false);
+        ui.textMinSize->clear();
+        ui.textMinAge->clear();
+        ui.textMaxAge->clear();
+        ui.spinMaxDepth->setValue(0);
+        ui.textExclude->clear();
+        ui.textExtra->clear();
+      });
   ui.buttonBox->button(QDialogButtonBox::RestoreDefaults)->click();
 
   QObject::connect(ui.buttonBox, &QDialogButtonBox::accepted, this,

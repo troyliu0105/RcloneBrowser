@@ -58,20 +58,20 @@ MountWidget::MountWidget(QProcess *process, const QString &remote,
                    static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(
                        &QProcess::finished),
                    this, [=](int status, QProcess::ExitStatus) {
-                     mProcess->deleteLater();
-                     mRunning = false;
-                     if (status == 0) {
-                       ui.showDetails->setStyleSheet(
-                           "QToolButton { border: 0; color: black; }");
-                       ui.showDetails->setText("Finished");
-                     } else {
-                       ui.showDetails->setStyleSheet(
-                           "QToolButton { border: 0; color: red; }");
-                       ui.showDetails->setText("Error");
-                     }
-                     ui.cancel->setToolTip("Close");
-                     emit finished();
-                   });
+        mProcess->deleteLater();
+        mRunning = false;
+        if (status == 0) {
+          ui.showDetails->setStyleSheet(
+              "QToolButton { border: 0; color: black; }");
+          ui.showDetails->setText("Finished");
+        } else {
+          ui.showDetails->setStyleSheet(
+              "QToolButton { border: 0; color: red; }");
+          ui.showDetails->setText("Error");
+        }
+        ui.cancel->setToolTip("Close");
+        emit finished();
+      });
 
   ui.showDetails->setStyleSheet("QToolButton { border: 0; color: green; }");
   ui.showDetails->setText("Mounted");

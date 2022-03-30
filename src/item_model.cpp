@@ -5,7 +5,7 @@
 
 namespace {
 static void advanceSpinner(QString &text) {
-  int spinnerPos = (int)((size_t)text.length() - 2);
+  int spinnerPos = (int) ((size_t) text.length() - 2);
   QChar current = text[spinnerPos];
   static const QChar spinner[] = {'-', '\\', '|', '/'};
   size_t spinnerCount = sizeof(spinner) / sizeof(*spinner);
@@ -41,8 +41,8 @@ public:
         return a->isFolder;
       }
       return mOrder == Qt::AscendingOrder
-                 ? mCompare.compare(a->name, b->name) < 0
-                 : mCompare.compare(b->name, a->name) < 0;
+             ? mCompare.compare(a->name, b->name) < 0
+             : mCompare.compare(b->name, a->name) < 0;
 
     case 1:
       if (a->isFolder != b->isFolder) {
@@ -50,8 +50,8 @@ public:
       }
       if (a->size == b->size) {
         return mOrder == Qt::AscendingOrder
-                   ? mCompare.compare(a->name, b->name) < 0
-                   : mCompare.compare(b->name, a->name) < 0;
+               ? mCompare.compare(a->name, b->name) < 0
+               : mCompare.compare(b->name, a->name) < 0;
       }
       return mOrder == Qt::AscendingOrder ? a->size < b->size
                                           : b->size < a->size;
@@ -62,8 +62,8 @@ public:
       }
       if (a->modified == b->modified) {
         return mOrder == Qt::AscendingOrder
-                   ? mCompare.compare(a->name, b->name) < 0
-                   : mCompare.compare(b->name, a->name) < 0;
+               ? mCompare.compare(a->name, b->name) < 0
+               : mCompare.compare(b->name, a->name) < 0;
       }
       return mOrder == Qt::AscendingOrder ? a->modified < b->modified
                                           : b->modified < a->modified;

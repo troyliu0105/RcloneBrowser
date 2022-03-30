@@ -128,7 +128,7 @@ TransferDialog::TransferDialog(bool isDownload, bool isDrop,
       settings->setValue("Settings/lastUsedSourceFolder", folder);
       ui.textSource->setText(QDir::toNativeSeparators(folder));
       ui.textDest->setText(remote + ":" +
-                           path.filePath(QFileInfo(folder).fileName()));
+          path.filePath(QFileInfo(folder).fileName()));
     }
   });
 
@@ -141,7 +141,7 @@ TransferDialog::TransferDialog(bool isDownload, bool isDrop,
     ui.textSource->setText(QDir::toNativeSeparators(default_folder));
     if (!default_folder.isEmpty()) {
       ui.textDest->setText(remote + ":" +
-                           path.filePath(QFileInfo(default_folder).fileName()));
+          path.filePath(QFileInfo(default_folder).fileName()));
     } else {
       ui.textDest->setText(remote + ":" + path.path());
     };
@@ -273,7 +273,7 @@ TransferDialog::TransferDialog(bool isDownload, bool isDrop,
         ui.textSource->setText(QDir::toNativeSeparators(folder));
         if (!folder.isEmpty()) {
           ui.textDest->setText(remote + ":" +
-                               path.filePath(QFileInfo(folder).fileName()));
+              path.filePath(QFileInfo(folder).fileName()));
         } else {
           ui.textDest->setText(remote + ":" + path.path());
         }
@@ -346,8 +346,7 @@ JobOptions *TransferDialog::getJobOptions() {
     mJobOptions->operation = JobOptions::Sync;
   }
 
-  mJobOptions->dryRun = mDryRun;
-  ;
+  mJobOptions->dryRun = mDryRun;;
 
   if (ui.rbSync->isChecked()) {
     mJobOptions->sync = true;
@@ -447,7 +446,7 @@ void TransferDialog::putJobOptions() {
   mDryRun = mJobOptions->dryRun;
   ui.rbSync->setChecked(mJobOptions->sync);
 
-  ui.cbSyncDelete->setCurrentIndex((int)mJobOptions->syncTiming);
+  ui.cbSyncDelete->setCurrentIndex((int) mJobOptions->syncTiming);
   // set combobox tooltips
   ui.cbSyncDelete->setItemData(0, "--delete-during", Qt::ToolTipRole);
   ui.cbSyncDelete->setItemData(1, "--delete-after", Qt::ToolTipRole);
